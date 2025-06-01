@@ -12,9 +12,9 @@
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       height: 100vh;
       width: 100vw;
-      color: white;
       font-family: 'Segoe UI', sans-serif;
       touch-action: manipulation;
+      perspective: 1000px;
     }
 
     .floating-text {
@@ -23,22 +23,21 @@
       font-size: 1.5rem;
       color: #ff69b4;
       text-shadow: 0 0 10px #ff69b4, 0 0 20px #fff, 0 0 30px #ff69b4;
-      animation: floatText 10s linear infinite;
+      animation: floatText 8s linear forwards;
       pointer-events: none;
+      transform-style: preserve-3d;
     }
 
     @keyframes floatText {
       0% {
-        top: 100%;
-        transform: translateY(0);
+        transform: translate3d(var(--x-start), var(--y-start), var(--z-start));
         opacity: 0;
       }
       10% {
         opacity: 1;
       }
       100% {
-        top: -10%;
-        transform: translateY(-100%);
+        transform: translate3d(var(--x-end), var(--y-end), var(--z-end));
         opacity: 0;
       }
     }
@@ -103,24 +102,37 @@
 
 <script>
   const floatingMessages = [
-    'embe 1/6 hạnh phúc nhé',
-    'May mắn',
-    ' luonvuituoi ',
-    'cục cức biết đi ',
-    'Anh Chiến thật thà nhắc em'
+    'embe 1/6 hạnh phúc nhé 🧸',     'May mắn🧸',     ' luonvuituoi 🧸 ',     'cục cức biết đi 🧸 ',     'Anh Chiến thật thà nhắc em 🧸' 
+
   ];
 
-  // Floating text
+  function randomRange(min, max) {
+    return (Math.random() * (max - min) + min).toFixed(2) + 'px';
+  }
+
   setInterval(() => {
     const text = document.createElement('div');
     text.className = 'floating-text';
-    text.style.left = Math.random() * 90 + '%';
-    text.style.top = '100%';
-    text.style.fontSize = (Math.random() * 1 + 1) + 'rem';
     text.textContent = floatingMessages[Math.floor(Math.random() * floatingMessages.length)];
+
+    const xStart = randomRange(-1000, 1000);
+    const yStart = randomRange(500, 1000);
+    const zStart = randomRange(-500, 500);
+    const xEnd = randomRange(-500, 500);
+    const yEnd = randomRange(-800, -1200);
+    const zEnd = randomRange(-500, 500);
+
+    text.style.setProperty('--x-start', xStart);
+    text.style.setProperty('--y-start', yStart);
+    text.style.setProperty('--z-start', zStart);
+    text.style.setProperty('--x-end', xEnd);
+    text.style.setProperty('--y-end', yEnd);
+    text.style.setProperty('--z-end', zEnd);
+    text.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+
     document.body.appendChild(text);
-    setTimeout(() => text.remove(), 10000);
-  }, 1000);
+    setTimeout(() => text.remove(), 8000);
+  }, 150);
 
   // Hearts falling (reduced density)
   setInterval(() => {
@@ -130,7 +142,7 @@
     heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 10000);
-  }, 600); // Reduced from 300ms to 600ms
+  }, 600);
 
   // Twinkle stars
   for (let i = 0; i < 100; i++) {
