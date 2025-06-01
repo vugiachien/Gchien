@@ -103,11 +103,12 @@
 
 <script>
   const floatingMessages = [
-    'Thích em lắm rồi',
+    'embe 1/6 hạnh phúc nhé',
     'Yêu nhắm',
-    'May mắn nhé',
-    'Một ngày vui',
-    'cục cức biết đi '
+    'May mắn',
+    ' luonvuituoi ',
+    'cục cức biết đi ',
+    'Anh Chiến thật thà nhắc em'
   ];
 
   // Floating text
@@ -120,7 +121,7 @@
     text.textContent = floatingMessages[Math.floor(Math.random() * floatingMessages.length)];
     document.body.appendChild(text);
     setTimeout(() => text.remove(), 10000);
-  }, 400);
+  }, 1000);
 
   // Hearts falling (reduced density)
   setInterval(() => {
