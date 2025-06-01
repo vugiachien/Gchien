@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Rain</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      height: 100vh;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .floating-text {
+      position: absolute;
+      white-space: nowrap;
+      font-size: 2rem;
+      color: #ff69b4;
+      text-shadow: 0 0 10px #ff69b4, 0 0 20px #fff, 0 0 30px #ff69b4;
+      animation: floatText 10s linear infinite;
+    }
+
+    @keyframes floatText {
+      0% {
+        top: 100%;
+        transform: translateY(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        top: -10%;
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall 10s linear infinite;
+      box-shadow: 0 0 10px red, 0 0 20px pink;
+    }
+
+    .heart:before, .heart:after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart:after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -10%;
+        opacity: 1;
+      }
+      100% {
+        top: 110%;
+        opacity: 0;
+      }
+    }
+
+    .twinkle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 6px white;
+      animation: twinkle 1.5s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const floatingMessages = [
+    'Thích em lắm rồi',
+    'Yêu nhắm',
+    'May mắn nhé',
+    'Một ngày vui'
+  ];
+
+  // Floating text
+  setInterval(() => {
+    const text = document.createElement('div');
+    text.className = 'floating-text';
+    text.style.left = Math.random() * 100 + '%';
+    text.style.top = '100%';
+    text.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+    text.textContent = floatingMessages[Math.floor(Math.random() * floatingMessages.length)];
+    document.body.appendChild(text);
+    setTimeout(() => text.remove(), 10000);
+  }, 400);
+
+  // Hearts falling
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+  }, 300);
+
+  // Twinkle stars
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.className = 'twinkle';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 2 + 's';
+    document.body.appendChild(star);
+  }
+</script>
+
+</body>
+</html>
