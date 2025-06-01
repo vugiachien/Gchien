@@ -2,26 +2,29 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Love Rain</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       overflow: hidden;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       height: 100vh;
+      width: 100vw;
       color: white;
       font-family: 'Segoe UI', sans-serif;
+      touch-action: manipulation;
     }
 
     .floating-text {
       position: absolute;
       white-space: nowrap;
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: #ff69b4;
       text-shadow: 0 0 10px #ff69b4, 0 0 20px #fff, 0 0 30px #ff69b4;
       animation: floatText 10s linear infinite;
+      pointer-events: none;
     }
 
     @keyframes floatText {
@@ -42,8 +45,8 @@
 
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       background: red;
       transform: rotate(45deg);
       animation: fall 10s linear infinite;
@@ -53,19 +56,19 @@
     .heart:before, .heart:after {
       content: "";
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       background: red;
       border-radius: 50%;
     }
 
     .heart:before {
-      top: -10px;
+      top: -8px;
       left: 0;
     }
 
     .heart:after {
-      left: -10px;
+      left: -8px;
       top: 0;
     }
 
@@ -103,16 +106,17 @@
     'Thích em lắm rồi',
     'Yêu nhắm',
     'May mắn nhé',
-    'Một ngày vui'
+    'Một ngày vui',
+    'cục cức biết đi '
   ];
 
   // Floating text
   setInterval(() => {
     const text = document.createElement('div');
     text.className = 'floating-text';
-    text.style.left = Math.random() * 100 + '%';
+    text.style.left = Math.random() * 90 + '%';
     text.style.top = '100%';
-    text.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+    text.style.fontSize = (Math.random() * 1 + 1) + 'rem';
     text.textContent = floatingMessages[Math.floor(Math.random() * floatingMessages.length)];
     document.body.appendChild(text);
     setTimeout(() => text.remove(), 10000);
