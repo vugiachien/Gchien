@@ -122,7 +122,7 @@
     setTimeout(() => text.remove(), 10000);
   }, 400);
 
-  // Hearts falling
+  // Hearts falling (reduced density)
   setInterval(() => {
     const heart = document.createElement('div');
     heart.className = 'heart';
@@ -130,7 +130,7 @@
     heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 10000);
-  }, 300);
+  }, 600); // Reduced from 300ms to 600ms
 
   // Twinkle stars
   for (let i = 0; i < 100; i++) {
